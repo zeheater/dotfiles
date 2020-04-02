@@ -12,6 +12,8 @@ Plug 'vim-python/python-syntax'
 "Plug 'vimwiki/vimwiki'
 "Plug 'artur-shaik/vim-javacomplete2'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 call plug#end()
 
 let g:powerline_pycmd="py3"
@@ -67,9 +69,10 @@ let g:airline_symbols.linenr = '☰ '
 map <F3> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-let NERDTreeShowLineNumbers=1
-let NERDTreeShowHidden=1
+let NERDTreeShowLineNumbers = 1
+let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
+let NERDTreeCustomOpenArgs={'file': {'reuse':'currenttab', 'where':'p', 'keepopen':1, 'stay':1}}
 
 let g:python_highlight_all = 1
 
@@ -95,7 +98,6 @@ set splitright
 "set completeopt-=preview
 set completeopt=longest
 set tags=./tags;
-
 
 :nnoremap <C-d> "_dd
 :nnoremap <C-l> :co.<CR>
@@ -142,3 +144,5 @@ autocmd! BufWritePost $MYVIMRC source $MYVIMRC
 
 " If python script map F2 to rename function
 autocmd Filetype python inoremap <buffer> <F2> <C-o>:call jedi#rename()<CR>
+"autocmd FileType python let g:deoplete#enable_at_startup = 1
+autocmd FileType text call g:deoplete#disable()

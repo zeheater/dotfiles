@@ -99,6 +99,7 @@ let g:python_highlight_all = 1
 let g:jedi#use_splits_not_buffers = "right"
 let g:jedi#popup_select_first = 0
 let g:jedi#show_call_signatures = 2
+let g:jedi#completions_enabled = 0
 
 " [ vim-go ]
 let g:go_auto_type_info = 1

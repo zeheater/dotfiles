@@ -113,6 +113,10 @@ let g:go_highlight_diagnostic_warnings = 0
 let g:go_list_type = 'quickfix'
 let g:go_updatetime = 350
 
+" [ supertab ]
+"let g:SuperTabContextDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
 " [ glaive + codefmt ]
 call glaive#Install()
 

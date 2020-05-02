@@ -96,7 +96,7 @@ let NERDTreeCustomOpenArgs={'file': {'reuse':'currenttab', 'where':'p', 'keepope
 let g:python_highlight_all = 1
 
 " [ jedi-vim ]
-let g:jedi#use_splits_not_buffers = "right"
+"let g:jedi#use_splits_not_buffers = "right"
 let g:jedi#popup_select_first = 0
 let g:jedi#show_call_signatures = 2
 let g:jedi#completions_enabled = 0
@@ -105,9 +105,9 @@ let g:jedi#completions_enabled = 0
 let g:go_auto_type_info = 1
 let g:go_fmt_command = 'gofumports'
 let g:go_fmt_fail_silently = 1
-let g:go_gocode_autobuild = 1
-let g:go_gocode_propose_source = 1
-let g:go_gocode_unimported_packages = 1
+"let g:go_gocode_autobuild = 1
+"let g:go_gocode_propose_source = 1
+"let g:go_gocode_unimported_packages = 1
 let g:go_highlight_diagnostic_errors = 0
 let g:go_highlight_diagnostic_warnings = 0
 let g:go_list_type = 'quickfix'
@@ -137,6 +137,10 @@ augroup autoformat_settings
 augroup END
 
 " [ custom key maps ]
+
+" easier buffer walking
+nnoremap <silent> <F12> :bn<CR>
+nnoremap <silent> <S-F12> :bp<CR>
 
 " use tabs as well as %s for matching brackets
 nnoremap <tab> %
@@ -176,6 +180,9 @@ nnoremap <Leader>= :FormatCode<CR>
 nnoremap ,mitm :-read $HOME/.vim/.skeleton_mitm.py<CR>
 nnoremap ,ansc :-read $HOME/.vim/.skeleton_android_network_security_config.xml<CR>
 
+" Terminal map
+tnoremap <Esc> <C-\><C-n>
+
 " [ strip trailing whitespace ]
 autocmd FileType cmake,c,cs,cpp,gradle,groovy,java,cql,sql,vcl,ice,php,javascript,css,html,perl,ruby,sh,python,gitcommit,gitconfig,git,xml,yml,yaml,markdown autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
@@ -186,7 +193,11 @@ autocmd FileType gitconfig setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpan
 " [ run python ]
 autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <F9> <C-o>:w<CR><C-o>:exec '!python3' shellescape(@%, 1)<CR>
-"
+
+" [ run go ]
+autocmd FileType go let g:deoplete#sources#go#gocode_binary = '/home/zeheater/go/bin/gocode'
+"autocmd FileType go call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*', })
+
 "
 "
 "

@@ -82,6 +82,7 @@ let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_error_symbol = "\u2717"
+let g:syntastic_asm_compiler = "nasm"
 
 " [ NERDTree ]
 map <F3> :NERDTreeToggle<CR>
@@ -138,6 +139,9 @@ augroup END
 
 " [ custom key maps ]
 
+" move path to cwd
+nnoremap <silent> <F2> :lchdir %:p:h<CR>:pwd<CR>
+
 " easier buffer walking
 nnoremap <silent> <F12> :bn<CR>
 nnoremap <silent> <S-F12> :bp<CR>
@@ -177,8 +181,11 @@ vmap gl :Gblame<CR>
 nnoremap <Leader>= :FormatCode<CR>
 
 " Snippets
-nnoremap ,mitm :-read $HOME/.vim/.skeleton_mitm.py<CR>
-nnoremap ,ansc :-read $HOME/.vim/.skeleton_android_network_security_config.xml<CR>
+nnoremap <silent> ,mitm :-read $HOME/.config/nvim/.skeleton_mitm.py<CR>
+nnoremap <silent> ,ansc :-read $HOME/.config/nvim/.skeleton_android_network_security_config.xml<CR>
+nnoremap <silent> ,sysd :-read $HOME/.config/nvim/.skeleton_systemd.service<CR>gg1j12la
+nnoremap <silent> ,syst :-read $HOME/.config/nvim/.skeleton_systemd.timer<CR>
+nnoremap <silent> ,nasm :-read $HOME/.config/nvim/.skeleton_nasm.asm<CR>gg6jA
 
 " Terminal map
 tnoremap <Esc> <C-\><C-n>
@@ -198,6 +205,11 @@ autocmd FileType python imap <buffer> <F9> <C-o>:w<CR><C-o>:exec '!python3' shel
 autocmd FileType go let g:deoplete#sources#go#gocode_binary = '/home/zeheater/go/bin/gocode'
 "autocmd FileType go call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*', })
 
+" [ run nasm ]
+autocmd BufNewFile,BufRead *.nasm set filetype=asm
+
 "
 "
 "
+"
+a"

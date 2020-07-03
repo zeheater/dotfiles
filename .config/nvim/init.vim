@@ -5,7 +5,7 @@ set encoding=utf-8 nobomb
 set ignorecase smartcase gdefault
 set undofile wildignore=*.o,*.obj,*.bak,*.exe,*.swp
 set signcolumn=yes
-set splitright nowrap
+set splitright splitbelow nowrap
 set path+=** tags=./tags
 set noshowmode
 
@@ -98,6 +98,7 @@ let g:python_highlight_all = 1
 
 " [ jedi-vim ]
 "let g:jedi#use_splits_not_buffers = "right"
+let g:jedi#auto_vim_configuration = 1
 let g:jedi#popup_select_first = 0
 let g:jedi#show_call_signatures = 2
 let g:jedi#completions_enabled = 0
@@ -194,7 +195,7 @@ tnoremap <Esc> <C-\><C-n>
 autocmd FileType cmake,c,cs,cpp,gradle,groovy,java,cql,sql,vcl,ice,php,javascript,css,html,perl,ruby,sh,python,gitcommit,gitconfig,git,xml,yml,yaml,markdown autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 " [ override file settings ]
-autocmd FileType html,xml,ruby,sh,javascript,javascript.jsx,jsx,json,yaml,sql,vim,cmake,proto,typescript,ps1,anko,bzl setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+autocmd FileType html,xml,ruby,sh,javascript,javascript.jsx,jsx,json,yaml,sql,vim,cmake,proto,typescript,ps1,anko,bzl,dart setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 autocmd FileType gitconfig setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
 
 " [ run python ]

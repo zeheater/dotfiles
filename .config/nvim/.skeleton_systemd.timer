@@ -1,0 +1,13 @@
+[Unit]
+Description=
+
+[Timer]
+; The following time units are understood: "s", "min", "h", "d", "w", "ms", "us".
+OnUnitActiveSec=
+AccuracySec=
+Unit=
+
+[Install]
+WantedBy=
+
+# man systemd.timer

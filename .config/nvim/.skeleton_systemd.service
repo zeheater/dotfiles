@@ -1,0 +1,14 @@
+[Unit]
+Description=
+
+[Service]
+Type=
+WorkingDirectory=
+ExecStartPre=
+ExecStart=/bin/bash -c ''
+ExecStop=
+
+[Install]
+WantedBy=
+
+# man systemd.service

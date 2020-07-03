@@ -1,0 +1,7 @@
+configuration {
+  modi: "window,drun,ssh,combi";
+  width: 95;
+  font: "consolas nf 12";
+  combi-modi: "window,drun,ssh";
+  theme: "dracula";
+}

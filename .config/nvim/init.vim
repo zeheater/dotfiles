@@ -44,6 +44,9 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
 Plug 'tweekmonster/deoplete-clang2', { 'for': 'cpp' }
 
+"   [ nginx conf ]
+Plug 'chr4/nginx.vim'
+
 "   [ google codefmt ]
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
@@ -122,7 +125,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " [ glaive + codefmt ]
 call glaive#Install()
 
-Glaive codefmt google_java_executable="java -jar /home/zeheater/Tools/google-java-format/core/target/google-java-format-1.8-SNAPSHOT-all-deps.jar"
+Glaive codefmt google_java_executable="java -jar $HOME/Tools/google-java-format/core/target/google-java-format-1.8-SNAPSHOT-all-deps.jar"
 
 augroup autoformat_settings
   autocmd FileType bzl AutoFormatBuffer buildifier
@@ -192,25 +195,31 @@ nnoremap <silent> ,nasm :-read $HOME/.config/nvim/.skeleton_nasm.asm<CR>gg6jA
 tnoremap <Esc> <C-\><C-n>
 
 " [ strip trailing whitespace ]
-autocmd FileType cmake,c,cs,cpp,gradle,groovy,java,cql,sql,vcl,ice,php,javascript,css,html,perl,ruby,sh,python,gitcommit,gitconfig,git,xml,yml,yaml,markdown autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType cmake,c,cs,cpp,gradle,groovy,java,cql,sql,vcl,ice,php,javascript,css,html,perl,ruby,sh,python,gitcommit,gitconfig,git,xml,yml,yaml,markdown,nginx autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 " [ override file settings ]
 autocmd FileType html,xml,ruby,sh,javascript,javascript.jsx,jsx,json,yaml,sql,vim,cmake,proto,typescript,ps1,anko,bzl,dart setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 autocmd FileType gitconfig setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
+autocmd FileType nginx setlocal tabstop=3 shiftwidth=3 softtabstop=3 noexpandtab
 
 " [ run python ]
 autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <F9> <C-o>:w<CR><C-o>:exec '!python3' shellescape(@%, 1)<CR>
 
 " [ run go ]
-autocmd FileType go let g:deoplete#sources#go#gocode_binary = '/home/zeheater/go/bin/gocode'
+autocmd FileType go let g:deoplete#sources#go#gocode_binary = '$HOME/go/bin/gocode'
 "autocmd FileType go call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*', })
 
 " [ run nasm ]
 autocmd BufNewFile,BufRead *.nasm set filetype=asm
 
+" [ nginx filetype helper ]
+au BufRead,BufNewFile /etc/nginx/*,/etc/nginx/conf.d/*,/usr/local/nginx/conf/*,$HOME/var/www/conf/* if &ft == '' | set filetype=nginx | endif
+
+
 "
 "
 "
 "
-a"
+"
+"

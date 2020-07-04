@@ -30,8 +30,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 "   [ edit mode plugins ]
+"Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'Raimondi/delimitMate'   " autoclose delimiters on open (quotes/brackets)
+Plug 'tmhedberg/matchit'      " match brackets with %
 
 "   [ language plugins ]
 Plug 'vim-python/python-syntax', {'for': 'python'}
@@ -54,7 +57,7 @@ Plug 'google/vim-glaive'
 
 "   [ file manager plugin ]
 Plug 'scrooloose/nerdtree'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 "   [ other ]
 Plug 'godlygeek/tabular'
@@ -65,6 +68,7 @@ Plug 'vim-syntastic/syntastic'
 call plug#end()
 
 " [ misc ]
+let delimitMate_expand_cr = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='angr'
@@ -167,6 +171,10 @@ imap <C-d> <C-o>"_dd
 " duplicate entire line
 nnoremap <C-l> :co.<CR>
 imap <C-l> <C-o><C-l>
+
+" disable q keys
+nnoremap q <Nop>
+vnoremap q <Nop>
 
 " disable arrow keys
 vnoremap <Up> <Nop>

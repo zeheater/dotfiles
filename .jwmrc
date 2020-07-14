@@ -35,6 +35,7 @@
 	<Restart label="Restart JWM" icon="restart.png"/>
 	<Program label="Suspend to RAM">systemctl suspend -i</Program>
 	<Exit label="Log off" confirm="true" icon="quit.png"></Exit>
+	<Program label="Hibernate">systemctl hibernate</Program>
 	<Exit label="Restart" confirm="true" icon="restart.png">systemctl reboot</Exit>
 	<Exit label="Shutdown" confirm="true" icon="quit.png">systemctl poweroff</Exit>
     </RootMenu>
@@ -156,7 +157,7 @@
         <!-- Default background. Note that a Background tag can be
               contained within a Desktop tag to give a specific background
               for that desktop.
-	--> 
+	-->
 	<Background type="solid">#000000</Background>
     </Desktops>
 
@@ -209,19 +210,19 @@
 
     <!-- Fn+F1 -->
     <Key keycode="121">exec:pactl set-sink-mute @DEFAULT_SINK@ toggle</Key>
-	    
+
     <!-- Fn+F2 -->
     <Key keycode="122">exec:pactl set-sink-volume @DEFAULT_SINK@ -10%</Key>
-	    
+
     <!-- Fn+F3 -->
     <Key keycode="123">exec:pactl set-sink-volume @DEFAULT_SINK@ +10%</Key>
-	    
+
     <!-- Fn+F6 -->
     <Key keycode="233">exec:~/Tools/Scripts/display/bash-xrandr-dimmer/brightness.sh u 0.1</Key>
-    
+
     <!-- Fn+F5 -->
     <Key keycode="232">exec:~/Tools/Scripts/display/bash-xrandr-dimmer/brightness.sh d 0.1</Key>
-    
+
     <!-- Fn+F12 -->
     <Key keycode="148">exec:galculator</Key>
 

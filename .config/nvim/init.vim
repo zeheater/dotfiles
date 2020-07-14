@@ -50,6 +50,9 @@ Plug 'tweekmonster/deoplete-clang2', { 'for': 'cpp' }
 "   [ nginx conf ]
 Plug 'chr4/nginx.vim'
 
+"   [ mardown viewer ]
+Plug 'iamcco/markdown-preview.nvim', { 'do' : 'cd app && yarn install' }
+
 "   [ google codefmt ]
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
@@ -73,6 +76,10 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='angr'
 let g:deoplete#enable_at_startup = 1
+
+" [ markdown-preview ]
+let g:mkdp_refresh_slow = 1
+let g:mkdp_browser = 'firefox'
 
 " [ gitgutter ]
 highlight GitGutterAdd    guifg=#009900 guibg=NONE ctermfg=2 ctermbg=NONE

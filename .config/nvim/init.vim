@@ -46,6 +46,7 @@ Plug 'zchee/deoplete-go', { 'for': 'go', 'do': 'make' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
 Plug 'tweekmonster/deoplete-clang2', { 'for': 'cpp' }
+Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust' }
 
 "   [ nginx conf ]
 Plug 'chr4/nginx.vim'
@@ -128,6 +129,11 @@ let g:go_highlight_diagnostic_errors = 0
 let g:go_highlight_diagnostic_warnings = 0
 let g:go_list_type = 'quickfix'
 let g:go_updatetime = 350
+
+" [ deoplete-rust ]
+let g:deoplete#sources#rust#racer_binary='/usr/bin/racer'
+let g:deoplete#sources#rust#rust_source_path='/home/zeheater/Sandbox/rust-src/src'
+let g:deoplete#sources#rust#show_duplicates=1
 
 " [ supertab ]
 "let g:SuperTabContextDefaultCompletionType = "<c-n>"
@@ -213,7 +219,7 @@ tnoremap <Esc> <C-\><C-n>
 autocmd FileType cmake,c,cs,cpp,gradle,groovy,java,cql,sql,vcl,ice,php,javascript,css,html,perl,ruby,sh,python,gitcommit,gitconfig,git,xml,yml,yaml,markdown,nginx autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 " [ override file settings ]
-autocmd FileType html,xml,ruby,sh,javascript,javascript.jsx,jsx,json,yaml,sql,vim,cmake,proto,typescript,ps1,anko,bzl,dart setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+autocmd FileType markdown,html,xml,ruby,sh,javascript,javascript.jsx,jsx,json,yaml,sql,vim,cmake,proto,typescript,ps1,anko,bzl,dart setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 autocmd FileType gitconfig setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
 autocmd FileType nginx setlocal tabstop=3 shiftwidth=3 softtabstop=3 noexpandtab
 
@@ -222,7 +228,7 @@ autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%,
 autocmd FileType python imap <buffer> <F9> <C-o>:w<CR><C-o>:exec '!python3' shellescape(@%, 1)<CR>
 
 " [ run go ]
-autocmd FileType go let g:deoplete#sources#go#gocode_binary = '$HOME/go/bin/gocode'
+autocmd FileType go let g:deoplete#sources#go#gocode_binary = '/home/zeheater/go/bin/gocode'
 "autocmd FileType go call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*', })
 
 " [ run nasm ]

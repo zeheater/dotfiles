@@ -234,6 +234,9 @@ autocmd FileType go let g:deoplete#sources#go#gocode_binary = '/home/zeheater/go
 " [ run nasm ]
 autocmd BufNewFile,BufRead *.nasm set filetype=asm
 
+" [ run rust ]
+autocmd FileType rust map <buffer> <F9> :w<CR>:exec '!cargo run' <CR>
+
 " [ nginx filetype helper ]
 au BufRead,BufNewFile /etc/nginx/*,/etc/nginx/conf.d/*,/usr/local/nginx/conf/*,$HOME/var/www/conf/* if &ft == '' | set filetype=nginx | endif
 

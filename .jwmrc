@@ -3,7 +3,7 @@
     <StartupCommand>
 	/usr/bin/picom --config ~/.config/picom/picom.conf -b &
         nitrogen --restore &amp;
-        xrandr --output eDP --brightness 0.6 &amp;
+        xrandr --output eDP-1-1 --brightness 0.6 &amp;
 	/usr/bin/redshift-gtk &amp;
 	cbatticon --command-critical-level "systemctl hibernate" --critical-level 12 &amp;
     </StartupCommand>

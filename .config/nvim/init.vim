@@ -1,5 +1,5 @@
 " [ General settings ]
-set title number relativenumber nohlsearch mouse= completeopt-=preview
+set title number relativenumber nohlsearch mouse=n completeopt-=preview
 set tabstop=5 shiftwidth=5 expandtab
 set encoding=utf-8 nobomb
 set ignorecase smartcase gdefault

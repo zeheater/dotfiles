@@ -237,6 +237,9 @@ autocmd BufNewFile,BufRead *.nasm set filetype=asm
 " [ run rust ]
 autocmd FileType rust map <buffer> <F9> :w<CR>:exec '!cargo run' <CR>
 
+" [ run markdown ]
+autocmd FileType markdown map <buffer> <F9> :w<CR>:MarkdownPreview<CR>
+
 " [ nginx filetype helper ]
 au BufRead,BufNewFile /etc/nginx/*,/etc/nginx/conf.d/*,/usr/local/nginx/conf/*,$HOME/var/www/conf/* if &ft == '' | set filetype=nginx | endif
 

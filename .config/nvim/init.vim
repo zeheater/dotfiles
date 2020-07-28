@@ -35,6 +35,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'Raimondi/delimitMate'   " autoclose delimiters on open (quotes/brackets)
 Plug 'tmhedberg/matchit'      " match brackets with %
+Plug 'alvan/vim-closetag'     " auto close html tag
 
 "   [ language plugins ]
 Plug 'vim-python/python-syntax', {'for': 'python'}
@@ -77,6 +78,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='angr'
 let g:deoplete#enable_at_startup = 1
+let g:closetag_filenames = '*.html,*.xml,*.md'
 
 " [ markdown-preview ]
 let g:mkdp_refresh_slow = 1

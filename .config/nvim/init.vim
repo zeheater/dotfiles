@@ -96,7 +96,7 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 2
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_error_symbol = "\u2717"
 let g:syntastic_asm_compiler = "nasm"

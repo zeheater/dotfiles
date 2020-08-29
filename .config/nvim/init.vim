@@ -167,7 +167,8 @@ nnoremap <silent> <F2> :lchdir %:p:h<CR>:pwd<CR>
 
 " easier buffer walking
 nnoremap <silent> <F12> :bn<CR>
-nnoremap <silent> <S-F12> :bp<CR>
+nnoremap <silent> <C-PageDown> :bn<CR>
+nnoremap <silent> <C-PageUp> :bp<CR>
 
 " use tabs as well as %s for matching brackets
 nnoremap <tab> %

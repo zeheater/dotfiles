@@ -4,6 +4,8 @@ export NVIM_PYTHON_LOG_FILE=/tmp/nvimlog
 export ANDROID_NDK=/opt/android-newsdk/ndk-bundle/
 export EDITOR=nvim
 
+export CLASSPATH=.:/usr/share/java/antlr-4.8-complete.jar
+
 alias config='/usr/bin/git --git-dir=/home/zeheater/dotfiles/ --work-tree=/home/zeheater'
 
 

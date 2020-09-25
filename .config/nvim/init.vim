@@ -100,6 +100,7 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_error_symbol = "\u2717"
 let g:syntastic_asm_compiler = "nasm"
+let g:syntastic_ignore_files = ["java"] " Disable java syntax check, causing crippling delay
 
 " [ NERDTree ]
 map <F3> :NERDTreeToggle<CR>
@@ -144,7 +145,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " [ glaive + codefmt ]
 call glaive#Install()
 
-Glaive codefmt google_java_executable="java -jar $HOME/Tools/google-java-format/core/target/google-java-format-1.8-SNAPSHOT-all-deps.jar"
+Glaive codefmt google_java_executable="java -jar /home/zeheater/Tools/google-java-format/core/target/google-java-format-1.8-SNAPSHOT-all-deps.jar"
 
 augroup autoformat_settings
   autocmd FileType bzl AutoFormatBuffer buildifier
@@ -153,7 +154,7 @@ augroup autoformat_settings
   autocmd FileType go AutoFormatBuffer gofmt
   autocmd FileType gn AutoFormatBuffer gn
   autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
-  autocmd FileType java AutoFormatBuffer google-java-format
+  "autocmd FileType java AutoFormatBuffer google-java-format
   "autocmd FileType python AutoFormatBuffer yapf
   " Alternative: autocmd FileType python AutoFormatBuffer autopep8
   autocmd FileType rust AutoFormatBuffer rustfmt
@@ -235,7 +236,7 @@ autocmd FileType go let g:deoplete#sources#go#gocode_binary = '/home/zeheater/go
 "autocmd FileType go call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*', })
 
 " [ run nasm ]
-autocmd BufNewFile,BufRead *.nasm set filetype=asm
+autocmd BufNewFile,BufRead *.nasm set filetype=asm shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 
 " [ run rust ]
 autocmd FileType rust map <buffer> <F9> :w<CR>:exec '!cargo run' <CR>

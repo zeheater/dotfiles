@@ -13,3 +13,4 @@ setxkbmap -layout us -option caps:ctrl_modifier
 #xrandr --output HDMI-0 --off --output eDP-1-1 --dpi 96x96 --auto
 xrandr --output HDMI-0 --off --output DP-2 --dpi 96x96 --auto
 /usr/bin/jwm
+#/usr/bin/spectrwm

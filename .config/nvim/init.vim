@@ -100,7 +100,7 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_error_symbol = "\u2717"
 let g:syntastic_asm_compiler = "nasm"
-let g:syntastic_ignore_files = ["java"] " Disable java syntax check, causing crippling delay
+let g:syntastic_ignore_files = ["java","md"] " Disable java syntax check, causing crippling delay
 
 " [ NERDTree ]
 map <F3> :NERDTreeToggle<CR>
@@ -149,7 +149,8 @@ Glaive codefmt google_java_executable="java -jar /home/zeheater/Tools/google-jav
 
 augroup autoformat_settings
   autocmd FileType bzl AutoFormatBuffer buildifier
-  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+  autocmd FileType proto,javascript AutoFormatBuffer clang-format
+  "autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
   autocmd FileType dart AutoFormatBuffer dartfmt
   autocmd FileType go AutoFormatBuffer gofmt
   autocmd FileType gn AutoFormatBuffer gn
@@ -215,6 +216,7 @@ nnoremap <silent> ,ansc :-read $HOME/.config/nvim/.skeleton_android_network_secu
 nnoremap <silent> ,sysd :-read $HOME/.config/nvim/.skeleton_systemd.service<CR>gg1j12la
 nnoremap <silent> ,syst :-read $HOME/.config/nvim/.skeleton_systemd.timer<CR>
 nnoremap <silent> ,nasm :-read $HOME/.config/nvim/.skeleton_nasm.asm<CR>gg6jA
+nnoremap <silent> ,cc :-read $HOME/.config/nvim/.skeleton_c.c<CR>gg4jA
 
 " Terminal map
 tnoremap <Esc> <C-\><C-n>
@@ -223,7 +225,7 @@ tnoremap <Esc> <C-\><C-n>
 autocmd FileType cmake,c,cs,cpp,gradle,groovy,java,cql,sql,vcl,ice,php,javascript,css,html,perl,ruby,sh,python,gitcommit,gitconfig,git,xml,yml,yaml,markdown,nginx autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 " [ override file settings ]
-autocmd FileType markdown,html,xml,ruby,sh,javascript,javascript.jsx,jsx,json,yaml,sql,vim,cmake,proto,typescript,ps1,anko,bzl,dart setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+autocmd FileType c,cpp,markdown,html,xml,ruby,sh,javascript,javascript.jsx,jsx,json,yaml,sql,vim,cmake,proto,typescript,ps1,anko,bzl,dart setlocal tabstop=2 shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 autocmd FileType gitconfig setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
 autocmd FileType nginx setlocal tabstop=3 shiftwidth=3 softtabstop=3 noexpandtab
 

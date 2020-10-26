@@ -15,6 +15,8 @@
 ;   The README contains a lot of information
 ;
 ;==========================================================
+[config]
+dpi=96
 
 [colors]
 ;background = ${xrdb:color0:#222}
@@ -32,14 +34,15 @@ orange = #ff9900
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
+archblue = #1793d1
 
 [bar/example]
-;monitor = ${env:MONITOR:HDMI-1}
+;monitor = ${env:MONITOR:DP-2}
 monitor = DP-2
 width = 100%
 height = 30
-;offset-x = 1%
-offset-y = 2
+offset-x = 0
+offset-y = 0
 radius = 0.0
 fixed-center = false
 
@@ -56,14 +59,16 @@ padding-left = 1
 padding-right = 1
 
 module-margin-left = 1
-module-margin-right = 2
+module-margin-right = 1
 
 font-0 = Consolas NF:pixelsize=14:antialias=true;4
-font-1 = mononoki:pixelsize=14:antialias=true
-font-2 = Terminus:size=15
-font-3 = JoyPixels:scale=7;4
+#font-1 = mononoki:pixelsize=14:antialias=true
+#font-2 = Terminus:size=15
+font-1 = JoyPixels:scale=7;4
+font-2 = font\-logos:style=logos:pixelsize=20;5
+font-3 = Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:pixelsize=16;4
 
-;modules-left = bspwm i3
+modules-left = archlogo
 ;modules-center = xwindow
 modules-right = filesystem pulseaudio cpu memory wlan eth battery temperature date
 ;modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
@@ -74,8 +79,7 @@ tray-padding = 1
 
 ;wm-restack = bspwm
 ;wm-restack = i3
-
-;override-redirect = true
+override-redirect = true
 
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
@@ -114,7 +118,7 @@ interval = 30
 
 mount-0 = /
 
-label-mounted = 📦 %used% / %total%
+label-mounted = %{T2}📦%{T-} %used% / %total%
 ;label-mounted =  %mountpoint%: %percentage_used%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
@@ -237,7 +241,7 @@ interval = 1.0
 format-connected = <ramp-signal> <label-connected>
 ;format-connected-underline = #9f78e1
 ;label-connected = "%local_ip% 📡%signal:3%dB %downspeed:9% %upspeed:9%"
-label-connected = "%local_ip% 📡%signal:3%dB 📥%downspeed:8% 📤%upspeed:8%"
+label-connected = %local_ip% 📡%signal:3%dB 📥%downspeed:8% 📤%upspeed:8%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -264,7 +268,8 @@ interface = lan0
 interval = 1.0
 
 ;format-connected-underline = #55aa55
-format-connected-prefix = "🟢 "
+;format-connected-prefix = "🟢 "
+format-connected-prefix = %{T4}%{T-}
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = "%local_ip% %linkspeed% 📥%downspeed:8% 📤%upspeed:8%"
 
@@ -370,19 +375,19 @@ ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-foreground = ${colors.foreground-alt}
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
+animation-charging-0 = %{T4}
+animation-charging-1 = %{T4}
+animation-charging-2 = %{T4}
+animation-charging-3 = %{T4}
+animation-charging-4 = %{T4}
 animation-charging-foreground = ${colors.yellow}
 animation-charging-framerate = 750
 
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-3 = 
-animation-discharging-4 = 
+animation-discharging-0 = %{T4}
+animation-discharging-1 = %{T4}
+animation-discharging-2 = %{T4}
+animation-discharging-3 = %{T4}
+animation-discharging-4 = %{T4}
 animation-discharging-foreground = ${colors.red}
 animation-discharging-framerate = 750
 
@@ -435,6 +440,19 @@ menu-2-0 = power off
 menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
+
+[module/archlogo]
+type = custom/text
+content = %{T3}%{T-}
+content-foreground = ${colors.archblue}
+content-padding = 0
+
+[module/ewmh]
+type = internal/xworkspaces
+enable-click = true
+enable-scroll = false
+format = <label-state>
+
 
 [settings]
 screenchange-reload = true

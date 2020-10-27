@@ -35,6 +35,10 @@ primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 archblue = #1793d1
+nord8 = #2bcec2
+success = #50fa7b
+notice = #f1fa8c
+warning = #ff5555
 
 [bar/example]
 ;monitor = ${env:MONITOR:DP-2}
@@ -75,7 +79,7 @@ modules-right = filesystem pulseaudio cpu memory wlan eth battery temperature da
 
 tray-position = right
 tray-padding = 1
-;tray-background = #0063ff
+tray-background = #3f3f3f
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -221,17 +225,36 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 1
-format = <label>
-label = 🖥️%percentage:2%%
+format = <ramp-load> <label>
+;label = %{T2}🖥️%{T-}%percentage:2%%
+label = %percentage:2%%
+ramp-load-0 = %{T4}%{T-}
+ramp-load-0-foreground = ${colors.success}
+
+ramp-load-1 = %{T4}%{T-}
+ramp-load-1-foreground = ${colors.notice}
+
+ramp-load-2 = %{T4}%{T-}
+ramp-load-2-foreground = ${colors.warning}
 
 [module/memory]
 type = internal/memory
-interval = 1
-format-foreground = ${colors.green}
-format-prefix = "🗄 "
+interval = 3
+;format-foreground = ${colors.green}
+;format-prefix = %{T4}%{T-}
+;format-prefix = %{T4}%{T-}
 ;format-prefix-foreground = ${colors.green}
 ;format-underline = #4bffdc
-label = %gb_used%/%gb_total%
+format = <ramp-used> <label>
+label = %gb_used:8%/%gb_total%
+ramp-used-0 = %{T4}%{T-}
+ramp-used-0-foreground = ${colors.success}
+
+ramp-used-1 = %{T4}%{T-}
+ramp-used-1-foreground = ${colors.notice}
+
+ramp-used-2 = %{T4}%{T-}
+ramp-used-2-foreground = ${colors.warning}
 
 [module/wlan]
 type = internal/network
@@ -290,7 +313,7 @@ date-alt = "%d/%m/%Y"
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = 
+format-prefix = -
 format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = #0a6cf5
 
@@ -393,24 +416,33 @@ animation-discharging-framerate = 750
 
 [module/temperature]
 type = internal/temperature
+interval = 2
+hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon2/temp1_input
 thermal-zone = 0
+base-temperature = 20
 warn-temperature = 80
 
-format = <label>
-;format = <ramp> <label>
+format = <ramp> <label>
 ;format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
+format-warn = <label-warn>
 ;format-warn-underline = ${self.format-underline}
 
-label = 🌡️%temperature-c%
-label-foreground = #e04e43
+;label = %{T2}🌡️%{T-}%temperature-c%
+label = %temperature-c%
+;label-foreground = ${colors.nord8}
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.red}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.orange}
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+ramp-0-foreground = ${colors.nord8}
+ramp-1-foreground = ${colors.success}
+ramp-2-foreground = ${colors.success}
+ramp-3-foreground = ${colors.notice}
+ramp-4-foreground = ${colors.warning}
 
 [module/powermenu]
 type = custom/menu
@@ -453,6 +485,22 @@ enable-click = true
 enable-scroll = false
 format = <label-state>
 
+icon-0 = Work;
+icon-1 = Web;
+icon-2 = Coding;
+icon-3 = untitled2;
+icon-4 = untitled3;
+icon-5 = untitled4;
+icon-6 = untitled5;
+icon-7 = untitled6;
+icon-8 = untitled7;
+icon-default = 
+
+label-active =  %name%
+label-active-foreground = ${colors.success}
+label-active-background = #3f3f3f
+;label-active-underline = #fccccc
+label-active-padding = 1
 
 [settings]
 screenchange-reload = true

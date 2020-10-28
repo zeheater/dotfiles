@@ -48,6 +48,7 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
 Plug 'tweekmonster/deoplete-clang2', { 'for': ['c', 'cpp'] }
 Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust' }
+Plug 'deoplete-plugins/deoplete-asm', { 'for': 'asm' }
 
 "   [ nginx conf ]
 Plug 'chr4/nginx.vim'
@@ -65,7 +66,7 @@ Plug 'scrooloose/nerdtree'
 "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 "   [ other ]
-Plug 'godlygeek/tabular'
+"Plug 'godlygeek/tabular'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'vim-syntastic/syntastic'

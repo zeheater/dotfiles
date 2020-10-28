@@ -46,7 +46,7 @@ Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'zchee/deoplete-go', { 'for': 'go', 'do': 'make' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
-Plug 'tweekmonster/deoplete-clang2', { 'for': 'cpp' }
+Plug 'tweekmonster/deoplete-clang2', { 'for': ['c', 'cpp'] }
 Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust' }
 
 "   [ nginx conf ]
@@ -137,6 +137,10 @@ let g:go_updatetime = 350
 let g:deoplete#sources#rust#racer_binary='/usr/bin/racer'
 let g:deoplete#sources#rust#rust_source_path='/home/zeheater/Sandbox/rust-src/src'
 let g:deoplete#sources#rust#show_duplicates=1
+
+" [ deoplete-clang2 ]
+let g:deoplete#sources#clang#executable='/usr/bin/clang'
+call deoplete#custom#source('clang2', 'min_pattern_length', 2)
 
 " [ supertab ]
 "let g:SuperTabContextDefaultCompletionType = "<c-n>"

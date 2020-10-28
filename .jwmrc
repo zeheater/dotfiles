@@ -228,9 +228,9 @@
     <Key keycode="148">exec:galculator</Key>
 
     <!-- Mask=4 (Super_L) -->
-    <Key mask="4" key="Return">exec:kitty</Key>
-    <Key mask="4" key="B">exec:firefox</Key>
+    <Key mask="4S" key="Return">exec:kitty</Key>
+    <Key mask="4S" key="B">exec:firefox</Key>
     <Key mask="4" key="E">exec:pcmanfm</Key>
     <Key mask="4" key="D">showdesktop</Key>
-    <Key mask="4" key="R">exec:~/.local/share/jwm-scripts/runmenu.sh</Key>
+    <Key mask="4" key="P">exec:~/.local/share/jwm-scripts/runmenu.sh</Key>
 </JWM>

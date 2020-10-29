@@ -30,7 +30,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 "   [ edit mode plugins ]
-"Plug 'ervandew/supertab'
+Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'Raimondi/delimitMate'   " autoclose delimiters on open (quotes/brackets)
@@ -69,11 +69,13 @@ Plug 'scrooloose/nerdtree'
 "Plug 'godlygeek/tabular'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'vim-syntastic/syntastic'
+Plug 'vim-syntastic/syntastic', { 'for': ['python'] }
+Plug 'dense-analysis/ale', { 'for': ['c', 'cpp', 'html', 'javascript', 'asm', 'make', 'plaintex'] }
 
 call plug#end()
 
 " [ misc ]
+autocmd FileType html let b:delimitMate_matchpairs = "(:),[:],{:}" "delimitMate clash with autocloseit, disable matching <:> 
 let delimitMate_expand_cr = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -102,6 +104,17 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_error_symbol = "\u2717"
 let g:syntastic_asm_compiler = "nasm"
 let g:syntastic_ignore_files = ["java","md"] " Disable java syntax check, causing crippling delay
+
+" [ ALE ]
+let g:airline#extensions#ale#enabled = 1
+let g:ale_completion_enabled = 0
+let g:ale_fix_on_save = 1
+let g:ale_sign_error = "\u2717"
+let g:ale_sign_warning = "\ue009"
+let g:ale_sign_info = "\uf05a"
+let g:ale_set_loclist = 0
+let g:ale_fixers = { 'javascript': ['prettier'] }
+let g:ale_linters = { 'make': ['checkmake'], 'asm': ['gcc'] }
 
 " [ NERDTree ]
 map <F3> :NERDTreeToggle<CR>
@@ -215,6 +228,10 @@ vmap gl :Gblame<CR>
 " codefmt
 nnoremap <Leader>= :FormatCode<CR>
 
+" ALE
+nmap <silent> <C-j> <Plug>(ale_next)
+nmap <silent> <C-k> <Plug>(ale_previous)
+
 " Snippets
 nnoremap <silent> ,mitm :-read $HOME/.config/nvim/.skeleton_mitm.py<CR>
 nnoremap <silent> ,ansc :-read $HOME/.config/nvim/.skeleton_android_network_security_config.xml<CR>
@@ -252,7 +269,7 @@ autocmd FileType rust map <buffer> <F9> :w<CR>:exec '!cargo run' <CR>
 autocmd FileType markdown map <buffer> <F9> :w<CR>:MarkdownPreview<CR>
 
 " [ nginx filetype helper ]
-au BufRead,BufNewFile /etc/nginx/*,/etc/nginx/conf.d/*,/usr/local/nginx/conf/*,$HOME/var/www/conf/* if &ft == '' | set filetype=nginx | endif
+autocmd BufRead,BufNewFile /etc/nginx/*,/etc/nginx/conf.d/*,/usr/local/nginx/conf/*,$HOME/var/www/conf/* if &ft == '' | set filetype=nginx | endif
 
 
 "

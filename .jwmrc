@@ -172,7 +172,7 @@
     <FocusModel>click</FocusModel>
 
     <!-- The snap mode (none, screen, or border) -->
-    <SnapMode distance="10">border</SnapMode>
+    <SnapMode distance="10">screen</SnapMode>
 
     <!-- The move mode (outline or opaque) -->
     <MoveMode>opaque</MoveMode>

@@ -293,8 +293,8 @@ interval = 1.0
 ;format-connected-underline = #55aa55
 ;format-connected-prefix = "🟢 "
 format-connected-prefix = %{T4}%{T-}
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = "%local_ip% %linkspeed% 📥%downspeed:8% 📤%upspeed:8%"
+format-connected-prefix-foreground = ${colors.success}
+label-connected = "%local_ip:13% %linkspeed% 📥%downspeed:8% 📤%upspeed:8%"
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>

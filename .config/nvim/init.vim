@@ -205,8 +205,8 @@ nnoremap <PageDown> <C-d>
 imap <C-d> <C-o>"_dd
 
 " duplicate entire line
-nnoremap <C-l> :co.<CR>
-imap <C-l> <C-o><C-l>
+nnoremap <C-l> :co.<CR>$
+imap <C-l> <C-o>:co.<CR><C-o>$
 
 " disable q keys
 nnoremap q <Nop>

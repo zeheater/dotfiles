@@ -1,6 +1,6 @@
 " [ General settings ]
 set title number relativenumber nohlsearch mouse=n completeopt-=preview
-set tabstop=5 shiftwidth=5 expandtab
+set tabstop=4 shiftwidth=4 expandtab
 set encoding=utf-8 nobomb
 set ignorecase smartcase gdefault
 set undofile wildignore=*.o,*.obj,*.bak,*.exe,*.swp
@@ -186,9 +186,8 @@ augroup END
 nnoremap <silent> <F2> :lchdir %:p:h<CR>:pwd<CR>
 
 " easier buffer walking
-nnoremap <silent> <F12> :bn<CR>
-nnoremap <silent> <C-PageDown> :bn<CR>
-nnoremap <silent> <C-PageUp> :bp<CR>
+nnoremap <silent> <C-H> <C-W><C-H>
+nnoremap <silent> <C-L> <C-W><C-L>
 
 " use tabs as well as %s for matching brackets
 nnoremap <tab> %
@@ -205,8 +204,8 @@ nnoremap <PageDown> <C-d>
 imap <C-d> <C-o>"_dd
 
 " duplicate entire line
-nnoremap <C-l> :co.<CR>$
-imap <C-l> <C-o>:co.<CR><C-o>$
+" nnoremap <C-l> :co.<CR>$
+inoremap <C-l> <C-o>:co.<CR><C-o>$
 
 " disable q keys
 nnoremap q <Nop>

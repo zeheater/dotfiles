@@ -16,6 +16,7 @@ Initializes PwnDBG
 end
 
 define init-gef
+set style address foreground white
 source ~/.gdbinit-gef.py
 end
 document init-gef

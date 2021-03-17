@@ -104,11 +104,14 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 2
+let g:syntastic_auto_jump = 3
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_error_symbol = "\u2717"
+let g:syntastic_warning_symbol = "\u26A0"
 let g:syntastic_asm_compiler = "nasm"
-let g:syntastic_ignore_files = ["java","md"] " Disable java syntax check, causing crippling delay
+" let g:syntastic_ignore_files = ["java", "c", "md"] " Disable java syntax check, causing crippling delay
+let g:syntastic_ignore_extensions="\c\v^([gx]?z|lzma|bz2|c|java|md)$"
 
 " [ ALE ]
 let g:airline#extensions#ale#enabled = 1

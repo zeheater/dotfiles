@@ -95,8 +95,8 @@ max_tracing_recursion = 1
 tracefile_prefix = ./gef-trace-
 
 [unicorn-emulate]
-show_disassembly = False
-verbose = False
+show_disassembly = True
+verbose = True
 
 [aliases]
 pf = print-format

@@ -11,6 +11,9 @@ set -x LS_COLORS 'rs=0:di=38;2;0;135;255;1:ln=01;36:mh=00:pi=40;33:so=01;35:do=0
 alias config='/usr/bin/git --git-dir=/home/zeheater/dotfiles/ --work-tree=/home/zeheater'
 alias pyany='source /home/zeheater/Sandbox/pythonbox/anything/bin/activate.fish'
 
+# Disable bell sound
+xset b off
+
 # Customization for bobthefish fish shell
 set -g theme_date_timezone (timezone)
 set -g theme_date_format "+%H:%M:%S"

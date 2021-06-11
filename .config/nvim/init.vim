@@ -1,5 +1,5 @@
 " [ General settings ]
-set title number relativenumber nohlsearch mouse=n completeopt-=preview
+set title number relativenumber nohlsearch mouse=nv completeopt-=preview
 set tabstop=4 shiftwidth=4 expandtab
 set encoding=utf-8 nobomb
 set ignorecase smartcase gdefault
@@ -46,7 +46,7 @@ Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 " Plug 'zchee/deoplete-go', { 'for': 'go', 'do': 'make' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+" Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
 Plug 'tweekmonster/deoplete-clang2', { 'for': ['c', 'cpp'] }
 Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust' }
@@ -215,10 +215,6 @@ imap <C-d> <C-o>"_dd
 " nnoremap <C-l> :co.<CR>$
 inoremap <C-l> <C-o>:co.<CR><C-o>$
 
-" disable q keys
-nnoremap q <Nop>
-vnoremap q <Nop>
-
 " disable arrow keys
 vnoremap <Up> <Nop>
 vnoremap <Down> <Nop>
@@ -246,6 +242,7 @@ nnoremap <silent> ,sysd :-read $HOME/.config/nvim/.skeleton_systemd.service<CR>g
 nnoremap <silent> ,syst :-read $HOME/.config/nvim/.skeleton_systemd.timer<CR>
 nnoremap <silent> ,nasm :-read $HOME/.config/nvim/.skeleton_nasm.asm<CR>gg6jA
 nnoremap <silent> ,cc :-read $HOME/.config/nvim/.skeleton_c.c<CR>gg4jA
+nnoremap <silent> ,scrape :-read $HOME/.config/nvim/.skeleton_scrape.js<CR>
 
 " Terminal map
 tnoremap <Esc> <C-\><C-n>

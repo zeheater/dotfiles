@@ -1,3 +1,3 @@
 function less
-command less -N $argv;
+command less -N --use-color $argv;
 end

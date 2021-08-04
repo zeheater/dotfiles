@@ -32,7 +32,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 "   [ edit mode plugins ]
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'Raimondi/delimitMate'   " autoclose delimiters on open (quotes/brackets)
@@ -166,7 +166,7 @@ call deoplete#custom#source('clang2', 'min_pattern_length', 2)
 
 " [ supertab ]
 "let g:SuperTabContextDefaultCompletionType = "<c-n>"
-let g:SuperTabDefaultCompletionType = "<c-n>"
+" let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " [ glaive + codefmt ]
 call glaive#Install()
@@ -175,7 +175,7 @@ Glaive codefmt google_java_executable="java -jar /home/zeheater/Tools/google-jav
 
 augroup autoformat_settings
   autocmd FileType bzl AutoFormatBuffer buildifier
-  autocmd FileType proto,javascript AutoFormatBuffer clang-format
+  autocmd FileType proto,javascript AutoFormatBuffer js-beautify
   "autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
   autocmd FileType dart AutoFormatBuffer dartfmt
   autocmd FileType go AutoFormatBuffer gofmt
@@ -198,8 +198,8 @@ nnoremap <silent> <C-H> <C-W><C-H>
 nnoremap <silent> <C-L> <C-W><C-L>
 
 " use tabs as well as %s for matching brackets
-nnoremap <tab> %
-vnoremap <tab> %
+" nnoremap <tab> %
+" vnoremap <tab> %
 
 " remap ; to : to save on hitting shift
 nnoremap ; :
@@ -242,13 +242,14 @@ nnoremap <silent> ,sysd :-read $HOME/.config/nvim/.skeleton_systemd.service<CR>g
 nnoremap <silent> ,syst :-read $HOME/.config/nvim/.skeleton_systemd.timer<CR>
 nnoremap <silent> ,nasm :-read $HOME/.config/nvim/.skeleton_nasm.asm<CR>gg6jA
 nnoremap <silent> ,cc :-read $HOME/.config/nvim/.skeleton_c.c<CR>gg4jA
-nnoremap <silent> ,scrape :-read $HOME/.config/nvim/.skeleton_scrape.js<CR>
+nnoremap <silent> ,jss :-read $HOME/.config/nvim/.skeleton_scrape.js<CR>
+nnoremap <silent> ,pys :-read $HOME/.config/nvim/.skeleton_scrape.py<CR>gg9jf'a
 
 " Terminal map
 tnoremap <Esc> <C-\><C-n>
 
 " [ strip trailing whitespace ]
-autocmd FileType cmake,c,cs,cpp,gradle,groovy,java,cql,sql,vcl,ice,php,javascript,css,html,perl,ruby,sh,python,gitcommit,gitconfig,git,xml,yml,yaml,markdown,nginx autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType cmake,c,cs,cpp,gradle,groovy,java,cql,sql,vcl,ice,php,javascript,css,html,perl,ruby,sh,python,gitcommit,gitconfig,git,xml,yml,yaml,nginx autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 " [ override file settings ]
 autocmd FileType c,cpp,markdown,html,xml,ruby,sh,javascript,javascript.jsx,jsx,typescriptreact,json,yaml,sql,vim,cmake,proto,typescript,ps1,anko,bzl,dart setlocal tabstop=2 shiftwidth=2 tabstop=2 softtabstop=2 expandtab

@@ -57,11 +57,28 @@
     <Option>height:1050</Option>
   </Group>
   <Group>
+    <Name>Alacritty</Name>
+    <Option>noborder</Option>
+    <Option>x:0</Option>
+    <Option>y:0</Option>
+    <Option>width:1920</Option>
+    <Option>height:1050</Option>
+  </Group>
+  <Group>
     <Name>Navigator</Name>
     <Option>pignore</Option>
     <Option>x:0</Option>
     <Option>y:0</Option>
     <Option>width:1920</Option>
+    <Option>desktop:2</Option>
+  </Group>
+  <Group>
+    <Name>google-chrome</Name>
+    <Option>pignore</Option>
+    <Option>x:0</Option>
+    <Option>y:0</Option>
+    <Option>width:1920</Option>
+    <Option>desktop:2</Option>
   </Group>
   <Group>
     <Name>sublime_text</Name>
@@ -78,11 +95,18 @@
     <Option>x:0</Option>
     <Option>y:0</Option>
     <Option>width:1920</Option>
-    <Option>height:1025</Option>
+    <Option>height:1050</Option>
     <Option></Option>
   </Group>
   <Group>
     <Name>pcmanfm</Name>
+    <Option>x:0</Option>
+    <Option>y:0</Option>
+    <Option>width:1920</Option>
+    <Option>height:1025</Option>
+  </Group>
+  <Group>
+    <Name>audacity</Name>
     <Option>x:0</Option>
     <Option>y:0</Option>
     <Option>width:1920</Option>
@@ -249,6 +273,9 @@
 
         <!-- Fn+F3 -->
       <Key keycode="123">exec:pactl set-sink-volume @DEFAULT_SINK@ +10%</Key>
+
+        <!-- Fn+F4-->
+      <Key mask="4" key="F4">exec:pactl set-source-mute alsa_input.pci-0000_05_00.6.analog-stereo toggle</Key>
 
         <!-- Fn+F6 -->
       <Key keycode="233">exec:~/Tools/Scripts/display/bash-xrandr-dimmer/brightness.sh u 0.1</Key>

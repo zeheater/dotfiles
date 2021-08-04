@@ -32,7 +32,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 "   [ edit mode plugins ]
-" Plug 'ervandew/supertab'
+Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'Raimondi/delimitMate'   " autoclose delimiters on open (quotes/brackets)
@@ -166,7 +166,7 @@ call deoplete#custom#source('clang2', 'min_pattern_length', 2)
 
 " [ supertab ]
 "let g:SuperTabContextDefaultCompletionType = "<c-n>"
-" let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " [ glaive + codefmt ]
 call glaive#Install()

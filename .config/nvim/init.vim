@@ -9,6 +9,7 @@ set splitright splitbelow nowrap
 set path+=** tags=./tags
 set noshowmode
 set colorcolumn=100
+set cmdheight=1
 highlight ColorColumn ctermbg=darkgrey
 
 " keep cursor in center of screen
@@ -52,8 +53,7 @@ Plug 'tweekmonster/deoplete-clang2', { 'for': ['c', 'cpp'] }
 Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust' }
 Plug 'deoplete-plugins/deoplete-asm', { 'for': 'asm' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescriptreact' }
-Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' } 
-
+Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
 
 "   [ nginx conf ]
 Plug 'chr4/nginx.vim'
@@ -80,7 +80,7 @@ Plug 'dense-analysis/ale', { 'for': ['c', 'cpp', 'html', 'javascript', 'asm', 'm
 call plug#end()
 
 " [ misc ]
-autocmd FileType html let b:delimitMate_matchpairs = "(:),[:],{:}" "delimitMate clash with autocloseit, disable matching <:> 
+autocmd FileType html let b:delimitMate_matchpairs = "(:),[:],{:}" "delimitMate clash with autocloseit, disable matching <:>
 let delimitMate_expand_cr = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -99,7 +99,7 @@ highlight GitGutterDelete guifg=#ff2222 guibg=NONE ctermfg=1 ctermbg=NONE
 
 " [ syntastic ]
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 0
@@ -125,7 +125,7 @@ let g:ale_fixers = { 'javascript': ['prettier'] }
 let g:ale_linters = { 'make': ['checkmake'], 'asm': ['gcc'] }
 
 " [ NERDTree ]
-map <F3> :NERDTreeToggle<CR>
+map <silent> <F3> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 let NERDTreeShowLineNumbers = 1
@@ -190,6 +190,31 @@ augroup END
 
 " [ custom key maps ]
 
+" buffer walking
+nmap <silent> <C-n> :bp<CR>
+" note C-m is enter
+nmap <silent> <C-m> :bn<CR>
+
+" keeping it center
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+" undo break points
+inoremap , ,<C-g>u
+inoremap . .<C-g>u
+inoremap ! !<C-g>u
+inoremap ? ?<C-g>u
+inoremap } }<ESC>=iB<C-o>i
+
+" moving text
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+inoremap <C-j> <ESC>:m .+1=<CR>==
+inoremap <C-k> <ESC>:m .-2=<CR>==
+nnoremap <leader>j :m .+1<CR>==
+nnoremap <leader>k :m .-2<CR>==
+
 " move path to cwd
 nnoremap <silent> <F2> :lchdir %:p:h<CR>:pwd<CR>
 
@@ -211,9 +236,9 @@ nnoremap <PageDown> <C-d>
 " move entire line to null register, deleting it
 imap <C-d> <C-o>"_dd
 
-" duplicate entire line
-" nnoremap <C-l> :co.<CR>$
-inoremap <C-l> <C-o>:co.<CR><C-o>$
+" duplicate line
+imap <C-l> <C-o>:t.<CR>
+vmap <C-l> :t'><CR>
 
 " disable arrow keys
 vnoremap <Up> <Nop>

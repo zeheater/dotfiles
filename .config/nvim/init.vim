@@ -3,7 +3,7 @@ set title number relativenumber nohlsearch mouse=nv completeopt-=preview
 set tabstop=4 shiftwidth=4 expandtab
 set encoding=utf-8 nobomb
 set ignorecase smartcase gdefault
-set undofile wildignore=*.o,*.obj,*.bak,*.exe,*.swp
+set undofile wildignore=*.o,*.obj,*.bak,*.exe,*.swp,*.pyc,**/node_modules/*,**/.git/*
 set signcolumn=yes
 set splitright splitbelow nowrap
 set path+=** tags=./tags
@@ -13,7 +13,7 @@ set cmdheight=1
 highlight ColorColumn ctermbg=darkgrey
 
 " keep cursor in center of screen
-set scrolloff=40 showcmd hidden wildmode=list:longest
+set scrolloff=40 showcmd hidden wildmode=longest,list,full
 
 syntax on
 highlight clear SignColumn
@@ -207,6 +207,13 @@ inoremap ! !<C-g>u
 inoremap ? ?<C-g>u
 inoremap } }<ESC>=iB<C-o>i
 
+" copying text
+vnoremap <leader>y "+y
+nnoremap <leader>y "+y
+
+" pasting text
+xnoremap <leader>p "_dP
+
 " moving text
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
@@ -214,6 +221,10 @@ inoremap <C-j> <ESC>:m .+1=<CR>==
 inoremap <C-k> <ESC>:m .-2=<CR>==
 nnoremap <leader>j :m .+1<CR>==
 nnoremap <leader>k :m .-2<CR>==
+
+" deleting text
+nnoremap d "_d
+vnoremap d "_d
 
 " move path to cwd
 nnoremap <silent> <F2> :lchdir %:p:h<CR>:pwd<CR>
@@ -257,8 +268,8 @@ vmap gl :Gblame<CR>
 nnoremap <Leader>= :FormatCode<CR>
 
 " ALE
-nmap <silent> <C-j> <Plug>(ale_next)
-nmap <silent> <C-k> <Plug>(ale_previous)
+" nmap <silent> <C-j> <Plug>(ale_next)
+" nmap <silent> <C-k> <Plug>(ale_previous)
 
 " Snippets
 nnoremap <silent> ,mitm :-read $HOME/.config/nvim/.skeleton_mitm.py<CR>

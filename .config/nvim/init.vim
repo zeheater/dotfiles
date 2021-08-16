@@ -13,7 +13,7 @@ set cmdheight=1
 highlight ColorColumn ctermbg=darkgrey
 
 " keep cursor in center of screen
-set scrolloff=40 showcmd hidden wildmode=longest,list,full
+set scrolloff=40 showcmd hidden wildmode=list:longest
 
 syntax on
 highlight clear SignColumn
@@ -217,14 +217,14 @@ xnoremap <leader>p "_dP
 " moving text
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-inoremap <C-j> <ESC>:m .+1=<CR>==
-inoremap <C-k> <ESC>:m .-2=<CR>==
+inoremap <C-j> <ESC>:m .+1=<CR>==i
+inoremap <C-k> <ESC>:m .-2=<CR>==i
 nnoremap <leader>j :m .+1<CR>==
 nnoremap <leader>k :m .-2<CR>==
 
 " deleting text
-nnoremap d "_d
-vnoremap d "_d
+" nnoremap d "_d
+vnoremap x "_d
 
 " move path to cwd
 nnoremap <silent> <F2> :lchdir %:p:h<CR>:pwd<CR>
@@ -232,6 +232,8 @@ nnoremap <silent> <F2> :lchdir %:p:h<CR>:pwd<CR>
 " easier buffer walking
 nnoremap <silent> <C-H> <C-W><C-H>
 nnoremap <silent> <C-L> <C-W><C-L>
+nnoremap <silent> <C-J> <C-w><Down>
+nnoremap <silent> <C-K> <C-w><Up>
 
 " use tabs as well as %s for matching brackets
 " nnoremap <tab> %
@@ -261,11 +263,19 @@ nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
 
+" vertical resize
+nnoremap <silent> <leader>- :vertical resize +5<CR>
+nnoremap <silent> <leader>= :vertical resize -5<CR>
+
+" shorthand to search word under cursor
+nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+" shorthand to create new buffer on right
+nnoremap <C-w>n :vertical new<CR>
 " git blame
 vmap gl :Gblame<CR>
 
 " codefmt
-nnoremap <Leader>= :FormatCode<CR>
+nnoremap <leader>g= :FormatCode<CR>
 
 " ALE
 " nmap <silent> <C-j> <Plug>(ale_next)

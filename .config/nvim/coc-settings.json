@@ -1,0 +1,11 @@
+{
+    "diagnostic.errorSign": "❌",
+    "diagnostic.hintSign": "🔵",
+    "diagnostic.infoSign": "💬",
+    "diagnostic.warningSign": "🟡",
+    "python.linting.enabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.analysis.typeCheckingMode": "off",
+    "python.analysis.diagnosticMode": "workspace",
+    "java.jdt.ls.home": "/home/zeheater/Tools/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository"
+}

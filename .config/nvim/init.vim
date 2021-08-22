@@ -1,5 +1,5 @@
 " [ General settings ]
-set title number relativenumber nohlsearch mouse=nv completeopt-=preview
+set number relativenumber nohlsearch mouse=nv completeopt-=preview
 set tabstop=4 shiftwidth=4 expandtab
 set encoding=utf-8 nobomb
 set ignorecase smartcase gdefault
@@ -8,23 +8,31 @@ set signcolumn=yes
 set splitright splitbelow nowrap
 set path+=** tags=./tags
 set noshowmode
-set colorcolumn=100
 set cmdheight=1
-highlight ColorColumn ctermbg=darkgrey
 
 " keep cursor in center of screen
 set scrolloff=40 showcmd hidden wildmode=list:longest
 
-syntax on
-highlight clear SignColumn
 
 " [ Plugins ]
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-endif
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': 'TSUpdate' }
+Plug 'nvim-treesitter/playground'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/plenary.nvim'
+
+"   [color scheme]
+Plug 'Aryansh-S/fastdark.vim'
+Plug 'epmor/hotline-vim'
+Plug 'senran101604/neotrix.vim'
+Plug 'crusoexia/vim-dracula' " 256color only
+Plug 'doums/darcula'
+Plug 'briones-gabriel/darcula-solid.nvim' " Jetbrains like
+Plug 'rktjmp/lush.nvim'
+Plug 'crusoexia/vim-monokai' " Sublime-text like
 
 "   [ status / side bar ]
 Plug 'vim-airline/vim-airline'
@@ -41,17 +49,9 @@ Plug 'tmhedberg/matchit'      " match brackets with %
 Plug 'alvan/vim-closetag'     " auto close html tag
 
 "   [ language plugins ]
-Plug 'vim-python/python-syntax', {'for': 'python'}
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'zchee/deoplete-jedi', {'for': 'python'}
-Plug 'elzr/vim-json', { 'for': 'json' }
+" Plug 'vim-python/python-syntax', {'for': 'python'}
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
-" Plug 'zchee/deoplete-go', { 'for': 'go', 'do': 'make' }
-" Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
-Plug 'tweekmonster/deoplete-clang2', { 'for': ['c', 'cpp'] }
-Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust' }
-Plug 'deoplete-plugins/deoplete-asm', { 'for': 'asm' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescriptreact' }
 Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
 
@@ -79,13 +79,37 @@ Plug 'dense-analysis/ale', { 'for': ['c', 'cpp', 'html', 'javascript', 'asm', 'm
 
 call plug#end()
 
+"   [ coloring ]
+set termguicolors
+syntax on
+colorscheme darcula
+set colorcolumn=100
+set cursorline
+highlight ColorColumn   ctermbg=235 guibg=#242331
+highlight CursorLine    ctermbg=235 guibg=#242331 cterm=none
+highlight CursorLineNr  cterm=none  ctermfg=11    gui=bold      guifg=Yellow
+highlight Normal        ctermfg=254 ctermbg=0     guifg=#A9B7C6 guibg=#000000
+" highlight Pmenu       ctermfg=0   ctermbg=218   guibg=#ffafd7
+highlight clear SignColumn
+highlight clear LineNr
+
+
+" [ Coc ]
+highlight CocErrorSign   ctermfg=9  guifg=#ff0000
+highlight CocHintSign    ctermfg=39 guifg=#00afff
+highlight CocWarningSign ctermfg=11 guifg=#fffd00
+highlight CocInfoSign    ctermfg=15 guifg=#ffffff
+
+" [ treesitter ]
+lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
+" highlight String ctermfg=113 guifg=#87ff5f
+
 " [ misc ]
 autocmd FileType html let b:delimitMate_matchpairs = "(:),[:],{:}" "delimitMate clash with autocloseit, disable matching <:>
 let delimitMate_expand_cr = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='angr'
-let g:deoplete#enable_at_startup = 1
+let g:airline_theme='bubblegum'
 let g:closetag_filetypes = 'html,xml,markdown'
 
 " [ markdown-preview ]
@@ -134,14 +158,7 @@ let NERDTreeMinimalUI = 1
 let NERDTreeCustomOpenArgs={'file': {'reuse':'currenttab', 'where':'p', 'keepopen':1, 'stay':1}}
 
 " [ python-syntax ]
-let g:python_highlight_all = 1
-
-" [ jedi-vim ]
-"let g:jedi#use_splits_not_buffers = "right"
-let g:jedi#auto_vim_configuration = 1
-let g:jedi#popup_select_first = 0
-let g:jedi#show_call_signatures = 2
-let g:jedi#completions_enabled = 0
+" let g:python_highlight_all = 1
 
 " [ vim-go ]
 let g:go_auto_type_info = 1
@@ -154,15 +171,6 @@ let g:go_highlight_diagnostic_errors = 0
 let g:go_highlight_diagnostic_warnings = 0
 let g:go_list_type = 'quickfix'
 let g:go_updatetime = 350
-
-" [ deoplete-rust ]
-let g:deoplete#sources#rust#racer_binary='/usr/bin/racer'
-let g:deoplete#sources#rust#rust_source_path='/home/zeheater/Sandbox/rust-src/src'
-let g:deoplete#sources#rust#show_duplicates=1
-
-" [ deoplete-clang2 ]
-let g:deoplete#sources#clang#executable='/usr/bin/clang'
-call deoplete#custom#source('clang2', 'min_pattern_length', 2)
 
 " [ supertab ]
 "let g:SuperTabContextDefaultCompletionType = "<c-n>"
@@ -190,10 +198,18 @@ augroup END
 
 " [ custom key maps ]
 
+nmap <silent> gd <Plug>(coc-definition)
+"nmap <C-n> <Plug>(coc-diagnostic-prev)
+nmap <C-m> <Plug>(coc-diagnostic-next)
+
+" old habbit
+nmap <C-a> gg0vG$
+
 " buffer walking
-nmap <silent> <C-n> :bp<CR>
+" note C-[ is <Esc>
+"nmap <silent> <C-[> :bp<CR>
 " note C-m is enter
-nmap <silent> <C-m> :bn<CR>
+nmap <silent> <C-]> :bn<CR>
 
 " keeping it center
 nnoremap n nzzzv
@@ -212,6 +228,7 @@ vnoremap <leader>y "+y
 nnoremap <leader>y "+y
 
 " pasting text
+nnoremap <leader>p "+P
 xnoremap <leader>p "_dP
 
 " moving text
@@ -225,6 +242,9 @@ nnoremap <leader>k :m .-2<CR>==
 " deleting text
 " nnoremap d "_d
 vnoremap x "_d
+
+" selecting text
+nnoremap V ^v$
 
 " move path to cwd
 nnoremap <silent> <F2> :lchdir %:p:h<CR>:pwd<CR>
@@ -267,10 +287,12 @@ nnoremap <Right> <Nop>
 nnoremap <silent> <leader>- :vertical resize +5<CR>
 nnoremap <silent> <leader>= :vertical resize -5<CR>
 
-" shorthand to search word under cursor
+" shorthand to search-replace word under cursor
 nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+
 " shorthand to create new buffer on right
 nnoremap <C-w>n :vertical new<CR>
+
 " git blame
 vmap gl :Gblame<CR>
 
@@ -298,18 +320,14 @@ tnoremap <Esc> <C-\><C-n>
 autocmd FileType cmake,c,cs,cpp,gradle,groovy,java,cql,sql,vcl,ice,php,javascript,css,html,perl,ruby,sh,python,gitcommit,gitconfig,git,xml,yml,yaml,nginx autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 " [ override file settings ]
-autocmd FileType c,cpp,markdown,html,xml,ruby,sh,javascript,javascript.jsx,jsx,typescriptreact,json,yaml,sql,vim,cmake,proto,typescript,ps1,anko,bzl,dart setlocal tabstop=2 shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+autocmd FileType c,cpp,markdown,html,xml,ruby,sh,javascript,javascript.jsx,jsx,typescriptreact,json,yaml,sql,vim,cmake,proto,typescript,ps1,anko,bzl,dart setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType gitconfig setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
 autocmd FileType nginx setlocal tabstop=3 shiftwidth=3 softtabstop=3 noexpandtab
 
 " [ run python ]
-autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-autocmd FileType python imap <buffer> <F9> <C-o>:w<CR><C-o>:exec '!python3' shellescape(@%, 1)<CR>
-
-" [ run go ]
-autocmd FileType go let g:deoplete#sources#go#gocode_binary = '/home/zeheater/go/bin/gocode'
-autocmd FileType go let g:go_def_mode = "gopls"
-autocmd FileType go call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*', })
+" autocmd FileType python hi Pmenu ctermbg=8
+autocmd FileType python map <buffer> <F9> :w<CR>:exec '!env python' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <F9> <C-o>:w<CR><C-o>:exec '!env python' shellescape(@%, 1)<CR>
 
 " [ run nasm ]
 autocmd BufNewFile,BufRead *.nasm set filetype=asm shiftwidth=2 tabstop=2 softtabstop=2 expandtab
@@ -327,9 +345,25 @@ autocmd BufRead,BufNewFile /etc/nginx/*,/etc/nginx/conf.d/*,/usr/local/nginx/con
 autocmd FileType tex nnoremap <F9> :!make<CR>
 autocmd FileType tex nnoremap <F11> :!zathura %:r.pdf<CR>
 
+" [ php ]
+autocmd FileType php set autoindent
 
 "
 "
 "
 "
-"
+if (!exists('*Refresh'))
+  function! Refresh(args) abort
+    exec 'colorscheme '. a:args
+    AirlineRefresh
+    set colorcolumn=100
+    set cursorline
+    highlight ColorColumn   ctermbg=235 guibg=#242331
+    highlight CursorLine    ctermbg=235 guibg=#242331 cterm=none
+    highlight CursorLineNr  cterm=none  ctermfg=11    gui=bold    guifg=Yellow
+    highlight ColorColumn ctermbg=235 guibg=#242331
+    highlight CursorLine  ctermbg=235 guibg=#242331 cterm=none
+    highlight clear SignColumn
+  endfunction
+endif
+

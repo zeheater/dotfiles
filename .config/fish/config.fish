@@ -19,4 +19,6 @@ set -g theme_date_timezone (timezone)
 set -g theme_date_format "+%H:%M:%S"
 set -g theme_powerline_fonts yes
 set -g theme_display_virtualenv yes
+set -g theme_title_display_process yes
+set -g theme_title_display_path no
 set -g VIRTUAL_ENV_DISABLE_PROMPT 1

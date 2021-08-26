@@ -1,6 +1,6 @@
 " [ General settings ]
 set number relativenumber nohlsearch mouse=nv completeopt-=preview
-set tabstop=4 shiftwidth=4 expandtab
+set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 set encoding=utf-8 nobomb
 set ignorecase smartcase gdefault
 set undofile wildignore=*.o,*.obj,*.bak,*.exe,*.swp,*.pyc,**/node_modules/*,**/.git/*
@@ -9,6 +9,7 @@ set splitright splitbelow nowrap
 set path+=** tags=./tags
 set noshowmode
 set cmdheight=1
+set noswapfile nobackup
 
 " keep cursor in center of screen
 set scrolloff=40 showcmd hidden wildmode=list:longest
@@ -25,14 +26,11 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
 
 "   [color scheme]
-Plug 'Aryansh-S/fastdark.vim'
-Plug 'epmor/hotline-vim'
-Plug 'senran101604/neotrix.vim'
-Plug 'crusoexia/vim-dracula' " 256color only
 Plug 'doums/darcula'
 Plug 'briones-gabriel/darcula-solid.nvim' " Jetbrains like
 Plug 'rktjmp/lush.nvim'
 Plug 'crusoexia/vim-monokai' " Sublime-text like
+Plug 'morhetz/gruvbox'
 
 "   [ status / side bar ]
 Plug 'vim-airline/vim-airline'
@@ -49,7 +47,6 @@ Plug 'tmhedberg/matchit'      " match brackets with %
 Plug 'alvan/vim-closetag'     " auto close html tag
 
 "   [ language plugins ]
-" Plug 'vim-python/python-syntax', {'for': 'python'}
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescriptreact' }
@@ -74,7 +71,7 @@ Plug 'scrooloose/nerdtree'
 "Plug 'godlygeek/tabular'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'vim-syntastic/syntastic', { 'for': ['python'] }
+" Plug 'vim-syntastic/syntastic', { 'for': ['python'] }
 Plug 'dense-analysis/ale', { 'for': ['c', 'cpp', 'html', 'javascript', 'asm', 'make', 'plaintex'] }
 
 call plug#end()
@@ -82,14 +79,13 @@ call plug#end()
 "   [ coloring ]
 set termguicolors
 syntax on
-colorscheme darcula
+colorscheme darcula-solid
 set colorcolumn=100
 set cursorline
 highlight ColorColumn   ctermbg=235 guibg=#242331
 highlight CursorLine    ctermbg=235 guibg=#242331 cterm=none
 highlight CursorLineNr  cterm=none  ctermfg=11    gui=bold      guifg=Yellow
 highlight Normal        ctermfg=254 ctermbg=0     guifg=#A9B7C6 guibg=#000000
-" highlight Pmenu       ctermfg=0   ctermbg=218   guibg=#ffafd7
 highlight clear SignColumn
 highlight clear LineNr
 
@@ -157,8 +153,6 @@ let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeCustomOpenArgs={'file': {'reuse':'currenttab', 'where':'p', 'keepopen':1, 'stay':1}}
 
-" [ python-syntax ]
-" let g:python_highlight_all = 1
 
 " [ vim-go ]
 let g:go_auto_type_info = 1
@@ -244,7 +238,7 @@ nnoremap <leader>k :m .-2<CR>==
 vnoremap x "_d
 
 " selecting text
-nnoremap V ^v$
+nnoremap <leader>v ^v$
 
 " move path to cwd
 nnoremap <silent> <F2> :lchdir %:p:h<CR>:pwd<CR>
@@ -352,18 +346,18 @@ autocmd FileType php set autoindent
 "
 "
 "
-if (!exists('*Refresh'))
-  function! Refresh(args) abort
-    exec 'colorscheme '. a:args
-    AirlineRefresh
-    set colorcolumn=100
-    set cursorline
-    highlight ColorColumn   ctermbg=235 guibg=#242331
-    highlight CursorLine    ctermbg=235 guibg=#242331 cterm=none
-    highlight CursorLineNr  cterm=none  ctermfg=11    gui=bold    guifg=Yellow
-    highlight ColorColumn ctermbg=235 guibg=#242331
-    highlight CursorLine  ctermbg=235 guibg=#242331 cterm=none
-    highlight clear SignColumn
-  endfunction
-endif
+" if (!exists('*Refresh'))
+"   function! Refresh(args) abort
+"     exec 'colorscheme '. a:args
+"     AirlineRefresh
+"     set colorcolumn=100
+"     set cursorline
+"     highlight ColorColumn   ctermbg=235 guibg=#242331
+"     highlight CursorLine    ctermbg=235 guibg=#242331 cterm=none
+"     highlight CursorLineNr  cterm=none  ctermfg=11    gui=bold      guifg=Yellow
+"     highlight Normal        ctermfg=254 ctermbg=0     guifg=#A9B7C6 guibg=#000000
+"     highlight clear SignColumn
+"     highlight clear LineNr
+"   endfunction
+" endif
 

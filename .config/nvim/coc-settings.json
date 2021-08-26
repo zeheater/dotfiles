@@ -3,7 +3,7 @@
     "diagnostic.hintSign": "🔵",
     "diagnostic.infoSign": "💬",
     "diagnostic.warningSign": "🟡",
-    "python.linting.enabled": false,
+    "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.analysis.typeCheckingMode": "off",
     "python.analysis.diagnosticMode": "workspace",

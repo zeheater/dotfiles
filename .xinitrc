@@ -21,17 +21,20 @@ twoscreen="--output DP-2 --dpi 96x96 --auto --brightness 0.6 --output HDMI-0 --a
 if [[ -n "$2" ]]; then
   if [[ "$2" == "one" ]]; then
     xrandr $onescreen
-    /usr/bin/spectrwm -c ~/.spectrwmone.conf
+    exec dbus-launch /usr/bin/spectrwm -c ~/.spectrwmone.conf
   elif [[ "$2" == "two" ]]; then
     xrandr $twoscreen -c ~/.spectrwmtwo.conf
-    /usr/bin/spectrwm
+    exec dbus-launch /usr/bin/spectrwm
   else
     echo "Unknown parameter"
     exit 1
   fi
 else
   xrandr $onescreen
-  /usr/bin/spectrwm -c ~/.spectrwmone.conf
+  exec dbus-launch /usr/bin/spectrwm -c ~/.spectrwmone.conf
 fi
 
 #/usr/bin/jwm
+
+# Note
+## use dbus-launch for flameshot gui to work correctly

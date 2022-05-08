@@ -1,5 +1,5 @@
 " [ General settings ]
-set number relativenumber nohlsearch mouse=nv completeopt-=preview
+set number relativenumber nohlsearch mouse=niv completeopt-=preview
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 set encoding=utf-8 nobomb
 set ignorecase smartcase gdefault
@@ -216,10 +216,6 @@ inoremap . .<C-g>u
 inoremap ! !<C-g>u
 inoremap ? ?<C-g>u
 inoremap } }<ESC>=iB<C-o>i
-
-" scroll floating window
-inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1, 1)\<cr>" : "\<Right>"
-inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0, 1)\<cr>" : "\<Left>"
 
 " copying text
 vnoremap <leader>y "+y

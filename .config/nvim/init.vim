@@ -72,7 +72,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 " Plug 'vim-syntastic/syntastic', { 'for': ['python'] }
-Plug 'dense-analysis/ale', { 'for': ['c', 'cpp', 'html', 'javascript', 'asm', 'make', 'plaintex'] }
+Plug 'dense-analysis/ale', { 'for': ['c', 'cpp', 'html', 'asm', 'make', 'plaintex'] }
 
 call plug#end()
 
@@ -187,7 +187,7 @@ augroup autoformat_settings
   "autocmd FileType python AutoFormatBuffer yapf
   " Alternative: autocmd FileType python AutoFormatBuffer autopep8
   autocmd FileType rust AutoFormatBuffer rustfmt
-  autocmd FileType vue AutoFormatBuffer prettier
+  " autocmd FileType vue AutoFormatBuffer prettier
 augroup END
 
 " [ custom key maps ]
@@ -216,6 +216,10 @@ inoremap . .<C-g>u
 inoremap ! !<C-g>u
 inoremap ? ?<C-g>u
 inoremap } }<ESC>=iB<C-o>i
+
+" scroll floating window
+inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1, 1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0, 1)\<cr>" : "\<Left>"
 
 " copying text
 vnoremap <leader>y "+y
@@ -341,6 +345,14 @@ autocmd FileType tex nnoremap <F11> :!zathura %:r.pdf<CR>
 
 " [ php ]
 autocmd FileType php set autoindent
+
+function! EmptyRegisters()
+    let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
+    for r in regs
+        call setreg(r, [])
+    endfor
+endfun
+
 
 "
 "

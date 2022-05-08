@@ -14,17 +14,17 @@ setxkbmap -layout us -option caps:ctrl_modifier
 #xrandr --output HDMI-0 --off --output DP-2 --dpi 96x96 --auto
 #xrandr --output HDMI-0 --dpi 96x96 --auto --right-of DP-2 --output DP-2 --dpi 96x96 --auto
 
-onescreen="--output DP-2 --dpi 96x96 --auto --brightness 0.6"
+onescreen="--output DP-2 --dpi 96x96 --auto --brightness 0.8"
 
-twoscreen="--output DP-2 --dpi 96x96 --auto --brightness 0.6 --output HDMI-0 --auto --right-of DP-2 --brightness 0.6"
+twoscreen="--output DP-2 --dpi 96x96 --auto --brightness 0.7 --output HDMI-0 --auto --right-of DP-2 --brightness 0.7"
 
 if [[ -n "$2" ]]; then
   if [[ "$2" == "one" ]]; then
     xrandr $onescreen
     exec dbus-launch /usr/bin/spectrwm -c ~/.spectrwmone.conf
   elif [[ "$2" == "two" ]]; then
-    xrandr $twoscreen -c ~/.spectrwmtwo.conf
-    exec dbus-launch /usr/bin/spectrwm
+    xrandr $twoscreen
+    exec dbus-launch /usr/bin/spectrwm -c ~/.spectrwmtwo.conf
   else
     echo "Unknown parameter"
     exit 1

@@ -261,12 +261,12 @@ ramp-used-2-foreground = ${colors.warning}
 [module/wlan]
 type = internal/network
 interface = wlp4s0
-interval = 1.0
+interval = 10.0
 
 format-connected = <ramp-signal> <label-connected>
 ;format-connected-underline = #9f78e1
 ;label-connected = "%local_ip% 📡%signal:3%dB %downspeed:9% %upspeed:9%"
-label-connected = %local_ip% 📡%signal:3%dB 📥%downspeed:8% 📤%upspeed:8%
+label-connected = %local_ip% 📥%downspeed:8% 📤%upspeed:8%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>

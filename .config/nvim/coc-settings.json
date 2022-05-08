@@ -5,7 +5,10 @@
     "diagnostic.warningSign": "🟡",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": ["--config ~/.config/flake8"],
     "python.analysis.typeCheckingMode": "off",
     "python.analysis.diagnosticMode": "workspace",
-    "java.jdt.ls.home": "/home/zeheater/Tools/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository"
+    "java.home": "/usr/lib/jvm/java-17-openjdk/",
+    "java.jdt.ls.home": "/home/zeheater/Tools/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository",
+    "javascript.suggestionActions.enabled": false
 }

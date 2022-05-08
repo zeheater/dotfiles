@@ -13,7 +13,7 @@
 #     Otherwise should run the program you selected.
 # Example input: geany, 2+2, 2-1, 10/3, 2*2=, (3^2)*10
 
-input=$( find ${PATH//:/ } -maxdepth 1 -executable -printf '%f\n' | rofi -show combi -i )
+input=$( find ${PATH//:/ } -maxdepth 1 -executable -printf '%f\n' | rofi -show combi -i)
 #input=$( find ${PATH//:/ } -maxdepth 1 -executable -printf '%f\n' | rofi -dmenu -i )
 
 if grep -q '+\|-[[:digit:]]\|\*\|\/\|\^' <<<"$input"; then

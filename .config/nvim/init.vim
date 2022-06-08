@@ -192,9 +192,12 @@ augroup END
 
 " [ custom key maps ]
 
+nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
 "nmap <C-n> <Plug>(coc-diagnostic-prev)
-nmap <C-m> <Plug>(coc-diagnostic-next)
+nmap <silent> gj :call CocAction('diagnosticNext')<cr>
+nmap <silent> gk :call CocAction('diagnosticPrevious')<cr>
 
 " old habbit
 nmap <C-a> gg0vG$

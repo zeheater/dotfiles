@@ -2,4 +2,6 @@
 # -x max connection per server
 # -s split (parallel download per file)
 # -r rate limit download 
--o "%(title)s [%(id)s].%(ext)s" --external-downloader aria2c --external-downloader-args '-c -j1 -x1 --max-download-limit=1M'
+# -o "%(title)s [%(id)s].%(ext)s" --external-downloader aria2c --external-downloader-args '-c -j8 -x8 --max-download-limit=1M'
+#-o "%(title)s [%(id)s].%(ext)s" --external-downloader aria2c --external-downloader-args '-c -j4'
+-o "%(title)s [%(id)s].%(ext)s"

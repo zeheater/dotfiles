@@ -24,6 +24,8 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': 'TSUpdate' }
 Plug 'nvim-treesitter/playground'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' }
+Plug 'nvim-tree/nvim-web-devicons'
 
 "   [color scheme]
 Plug 'doums/darcula'
@@ -39,18 +41,19 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 "   [ edit mode plugins ]
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'Raimondi/delimitMate'   " autoclose delimiters on open (quotes/brackets)
 Plug 'tmhedberg/matchit'      " match brackets with %
 Plug 'alvan/vim-closetag'     " auto close html tag
+Plug 'tpope/vim-repeat'
 
 "   [ language plugins ]
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
-Plug 'leafgarland/typescript-vim', { 'for': 'typescriptreact' }
-Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
+" Plug 'leafgarland/typescript-vim', { 'for': 'typescriptreact' }
+" Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescriptreact' }
 
 "   [ nginx conf ]
 Plug 'chr4/nginx.vim'
@@ -91,10 +94,52 @@ highlight clear LineNr
 
 
 " [ Coc ]
+set updatetime=300
 highlight CocErrorSign   ctermfg=9  guifg=#ff0000
 highlight CocHintSign    ctermfg=39 guifg=#00afff
 highlight CocWarningSign ctermfg=11 guifg=#fffd00
 highlight CocInfoSign    ctermfg=15 guifg=#ffffff
+highlight Conceal        ctermbg=8  guifg=#696969
+" Use tab for trigger completion with characters ahead and navigate
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+" Use <c-space> to trigger completion
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+" Highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+" Use K to show documentation in preview window
+nnoremap <silent> K :call ShowDocumentation()<CR>
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+" Remap keys for applying refactor code actions
+nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
+xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+
 
 " [ treesitter ]
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
@@ -104,6 +149,7 @@ lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incr
 autocmd FileType html let b:delimitMate_matchpairs = "(:),[:],{:}" "delimitMate clash with autocloseit, disable matching <:>
 let delimitMate_expand_cr = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#coc#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
 let g:closetag_filetypes = 'html,xml,markdown'
@@ -111,6 +157,7 @@ let g:closetag_filetypes = 'html,xml,markdown'
 " [ markdown-preview ]
 let g:mkdp_refresh_slow = 1
 let g:mkdp_browser = 'firefox'
+let g:mkdp_theme = 'light'
 
 " [ gitgutter ]
 highlight GitGutterAdd    guifg=#009900 guibg=NONE ctermfg=2 ctermbg=NONE
@@ -118,20 +165,20 @@ highlight GitGutterChange guifg=#bbbb00 guibg=NONE ctermfg=3 ctermbg=NONE
 highlight GitGutterDelete guifg=#ff2222 guibg=NONE ctermfg=1 ctermbg=NONE
 
 " [ syntastic ]
-set statusline+=%#warningmsg#
+" set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_auto_jump = 3
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_error_symbol = "\u2717"
-let g:syntastic_warning_symbol = "\u26A0"
-let g:syntastic_asm_compiler = "nasm"
+" let g:syntastic_always_populate_loc_list = 0
+" let g:syntastic_auto_loc_list = 2
+" let g:syntastic_auto_jump = 3
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_error_symbol = "\u2717"
+" let g:syntastic_warning_symbol = "\u26A0"
+" let g:syntastic_asm_compiler = "nasm"
 " let g:syntastic_ignore_files = ["java", "c", "md"] " Disable java syntax check, causing crippling delay
-let g:syntastic_ignore_extensions="\c\v^([gx]?z|lzma|bz2|c|java|md)$"
+" let g:syntastic_ignore_extensions="\c\v^([gx]?z|lzma|bz2|c|java|md)$"
 
 " [ ALE ]
 let g:airline#extensions#ale#enabled = 1
@@ -167,8 +214,8 @@ let g:go_list_type = 'quickfix'
 let g:go_updatetime = 350
 
 " [ supertab ]
-"let g:SuperTabContextDefaultCompletionType = "<c-n>"
-let g:SuperTabDefaultCompletionType = "<c-n>"
+" let g:SuperTabContextDefaultCompletionType = "<c-n>"
+" let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " [ glaive + codefmt ]
 call glaive#Install()
@@ -191,13 +238,15 @@ augroup autoformat_settings
 augroup END
 
 " [ custom key maps ]
-
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gR <Plug>(coc-rename)
 "nmap <C-n> <Plug>(coc-diagnostic-prev)
 nmap <silent> gj :call CocAction('diagnosticNext')<cr>
 nmap <silent> gk :call CocAction('diagnosticPrevious')<cr>
+nnoremap <silent> K :call CocActionAsync('doHover')<CR> 
 
 " old habbit
 nmap <C-a> gg0vG$
@@ -218,7 +267,7 @@ inoremap , ,<C-g>u
 inoremap . .<C-g>u
 inoremap ! !<C-g>u
 inoremap ? ?<C-g>u
-inoremap } }<ESC>=iB<C-o>i
+" inoremap } }<ESC>=iB<C-o>i
 
 " copying text
 vnoremap <leader>y "+y
@@ -263,6 +312,10 @@ nnoremap ; :
 nnoremap <PageUp> <C-u>
 nnoremap <PageDown> <C-d>
 
+" scroll floating window
+inoremap <silent><nowait><expr> <ScrollWheelDown> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1, 1)\<cr>" : ""
+inoremap <silent><nowait><expr> <ScrollWheelUp> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0, 1)\<cr>" : ""
+
 " move entire line to null register, deleting it
 imap <C-d> <C-o>"_dd
 
@@ -296,6 +349,14 @@ vmap gl :Gblame<CR>
 " codefmt
 nnoremap <leader>g= :FormatCode<CR>
 
+" Telescope
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+
 " ALE
 " nmap <silent> <C-j> <Plug>(ale_next)
 " nmap <silent> <C-k> <Plug>(ale_previous)
@@ -314,10 +375,10 @@ nnoremap <silent> ,pys :-read $HOME/.config/nvim/.skeleton_scrape.py<CR>gg9jf'a
 tnoremap <Esc> <C-\><C-n>
 
 " [ strip trailing whitespace ]
-autocmd FileType cmake,c,cs,cpp,gradle,groovy,java,cql,sql,vcl,ice,php,javascript,css,html,perl,ruby,sh,python,gitcommit,gitconfig,git,xml,yml,yaml,nginx autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType cmake,c,cs,cpp,gradle,groovy,java,cql,sql,vcl,ice,php,javascript,typescript,css,html,perl,ruby,sh,python,gitcommit,gitconfig,git,xml,yml,yaml,nginx autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 " [ override file settings ]
-autocmd FileType c,cpp,markdown,html,xml,ruby,sh,javascript,javascript.jsx,jsx,typescriptreact,json,yaml,sql,vim,cmake,proto,typescript,ps1,anko,bzl,dart setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType c,cpp,markdown,html,xml,ruby,sh,javascript,javascript.jsx,jsx,typescriptreact,json,yaml,sql,vim,cmake,proto,typescript,ps1,anko,bzl,dart setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab textwidth=100
 autocmd FileType gitconfig setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
 autocmd FileType nginx setlocal tabstop=3 shiftwidth=3 softtabstop=3 noexpandtab
 

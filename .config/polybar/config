@@ -16,7 +16,7 @@
 ;
 ;==========================================================
 [config]
-dpi=96
+dpi=142
 
 [colors]
 ;background = ${xrdb:color0:#222}
@@ -39,6 +39,7 @@ nord8 = #2bcec2
 success = #50fa7b
 notice = #f1fa8c
 warning = #ff5555
+
 
 [bar/example]
 ;monitor = ${env:MONITOR:DP-2}
@@ -65,11 +66,12 @@ padding-right = 1
 module-margin-left = 1
 module-margin-right = 1
 
+## if family name clash, edit /etc/fonts/conf.d/
 font-0 = Consolas NF:pixelsize=14:antialias=true;4
 #font-1 = mononoki:pixelsize=14:antialias=true
 #font-2 = Terminus:size=15
-font-1 = JoyPixels:scale=7;4
-font-2 = font\-logos:style=logos:pixelsize=20;5
+font-1 = JoyPixels:antialias=false:scale=7;4
+font-2 = font\\-logos:style=logos:pixelsize=20;5
 font-3 = Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:pixelsize=16;4
 font-4 = Consolas NF:pixelsize=22:antialias=true;6
 font-5 = Consolas NF:pixelsize=28:antialias=true;5
@@ -86,6 +88,65 @@ tray-background = #3f3f3f
 ;wm-restack = bspwm
 ;wm-restack = i3
 override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+bottom = true
+
+[bar/i3bar]
+#monitor = ${env:MONITOR:DP-2}
+monitor = eDP-1-0
+width = 100%
+height = 30
+offset-x = 0
+offset-y = 0
+radius = 0.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 1
+padding-right = 1
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = Consolas NF:pixelsize=12:antialias=true;4
+font-1 = JoyPixels:scale=8;5
+font-2 = font\\-logos:style=logos:pixelsize=18;4
+font-3 = Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:pixelsize=14;4
+font-4 = mononoki NF:pixelsize=20:style=Regular;6
+font-5 = mononoki NF:pixelsize=28:style=Regular;6
+font-6 = Meiryo,メイリオ:style=Regular,Normal;6
+font-7 = Droid Sans Fallback:style=Regular;6
+font-8 = Droid Sans Thai:style=Regular;6
+
+modules-left = archlogo i3
+;modules-center = xwindow
+modules-right = spotify filesystem pulseaudio cpu memory wlan eth battery temperature date
+;modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
+
+tray-position = right
+tray-padding = 1
+tray-background = #3f3f3f
+
+;wm-restack = bspwm
+wm-restack = i3
+override-redirect = false
 
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
@@ -124,7 +185,8 @@ interval = 30
 
 mount-0 = /
 
-label-mounted = %{T2}📦%{T-} %used% / %total%
+label-mounted = %{T2}💿%{T-} %used% / %total%
+; label-mounted = %{T2}📦%{T-} %used% / %total%
 ;label-mounted =  %mountpoint%: %percentage_used%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
@@ -154,36 +216,56 @@ label-empty-padding = 2
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
 index-sort = true
 wrapping-scroll = false
 
-; Only show workspaces on the same output as the bar
-;pin-workspaces = true
 
-label-mode-padding = 2
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+
+label-dimmed-underline = #FFF
+
+label-mode-padding = 1
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
-label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
+label-focused = %icon%
+label-focused-font = 6
+label-focused-foreground = ${colors.success}
+label-focused-background = #3f3f3f
+label-focused-underline = #fccccc
+label-focused-padding = 1
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
-label-unfocused-padding = 2
+label-unfocused = %icon%
+; label-unfocused = %name% %icon%
+label-unfocused-font = 5
+label-unfocused-padding = 1
 
 ; visible = Active workspace on unfocused monitor
-label-visible = %index%
+label-visible = %icon%
+label-visible-font = 6
+label-visible-foreground = ${self.label-focused-foreground}
 label-visible-background = ${self.label-focused-background}
 label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %index%
+label-urgent = %icon%
+label-urgent-font = 5
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-padding = 1
 
 ; Separator in between workspaces
 ; label-separator = |
@@ -230,14 +312,24 @@ interval = 1
 format = <ramp-load> <label>
 ;label = %{T2}🖥️%{T-}%percentage:2%%
 label = %percentage:2%%
-ramp-load-0 = %{T4}%{T-}
+ramp-load-0 = %{T4}💻%{T-}
 ramp-load-0-foreground = ${colors.success}
+ramp-load-1 = %{T4}💻%{T-}
+ramp-load-1-foreground = ${colors.success}
+ramp-load-2 = %{T4}💻%{T-}
+ramp-load-2-foreground = ${colors.success}
 
-ramp-load-1 = %{T4}%{T-}
-ramp-load-1-foreground = ${colors.notice}
+ramp-load-3 = %{T4}💻%{T-}
+ramp-load-3-foreground = ${colors.notice}
+ramp-load-4 = %{T4}💻%{T-}
+ramp-load-4-foreground = ${colors.notice}
+ramp-load-5 = %{T4}💻%{T-}
+ramp-load-5-foreground = ${colors.notice}
 
-ramp-load-2 = %{T4}%{T-}
-ramp-load-2-foreground = ${colors.warning}
+ramp-load-6 = %{T4}💻%{T-}
+ramp-load-6-foreground = ${colors.warning}
+ramp-load-7 = %{T4}💻%{T-}
+ramp-load-7-foreground = ${colors.warning}
 
 [module/memory]
 type = internal/memory
@@ -249,14 +341,26 @@ interval = 3
 ;format-underline = #4bffdc
 format = <ramp-used> <label>
 label = %gb_used:8%/%gb_total%
+
 ramp-used-0 = %{T4}%{T-}
 ramp-used-0-foreground = ${colors.success}
-
 ramp-used-1 = %{T4}%{T-}
-ramp-used-1-foreground = ${colors.notice}
-
+ramp-used-1-foreground = ${colors.success}
 ramp-used-2 = %{T4}%{T-}
-ramp-used-2-foreground = ${colors.warning}
+ramp-used-2-foreground = ${colors.success}
+
+ramp-used-3 = %{T4}%{T-}
+ramp-used-3-foreground = ${colors.notice}
+ramp-used-4 = %{T4}%{T-}
+ramp-used-4-foreground = ${colors.notice}
+ramp-used-5 = %{T4}%{T-}
+ramp-used-5-foreground = ${colors.notice}
+ramp-used-6 = %{T4}%{T-}
+
+ramp-used-6-foreground = ${colors.warning}
+ramp-used-7 = %{T4}%{T-}
+ramp-used-7-foreground = ${colors.warning}
+
 
 [module/wlan]
 type = internal/network
@@ -315,7 +419,7 @@ date-alt = "%d/%m/%Y"
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = -
+format-prefix =
 format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = #0a6cf5
 
@@ -382,8 +486,8 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery
-battery = BAT0
 adapter = ADP0
+battery = BAT0
 full-at = 60
 
 format-charging = <animation-charging> <label-charging>
@@ -396,7 +500,8 @@ label-discharging = %percentage%
 label-discharging-font = 1
 ;format-discharging-underline = ${self.format-charging-underline}
 
-format-full-prefix = "🔋"
+format-full-prefix = "⚡"
+; format-full-prefix = "🔋"
 format-full-prefix-foreground = ${colors.yellow}
 ;format-full-underline = ${self.format-charging-underline}
 
@@ -521,6 +626,19 @@ label-empty = %icon%
 label-empty-font = 5
 label-empty-foreground = #66
 label-empty-padding = 1
+
+[module/spotify]
+type = custom/script
+interval = 1
+# format-prefix = " "
+format = <label>
+; exec = python3 /home/zeheater/Tools/Scripts/spotipy.py -f '{artist}: {song}'
+exec = python3 /home/zeheater/Tools/Scripts/spotipy.py
+format-underline = #1db954
+;control players (optional)
+click-left = python /home/zeheater/Tools/Scripts/spotipy.py --command toggle
+click-right = python /home/zeheater/Tools/Scripts/spotipy.py --command next
+click-middle = python /home/zeheater/Tools/Scripts/spotipy.py --command prev
 
 [settings]
 screenchange-reload = true

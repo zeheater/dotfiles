@@ -101,8 +101,8 @@ cursor-scroll = ns-resize
 bottom = true
 
 [bar/i3bar]
-#monitor = ${env:MONITOR:DP-2}
-monitor = eDP-1-0
+monitor = ${env:MONITOR:DP-2}
+#monitor = eDP-1-0
 width = 100%
 height = 30
 offset-x = 0
@@ -342,20 +342,20 @@ interval = 3
 format = <ramp-used> <label>
 label = %gb_used:8%/%gb_total%
 
-ramp-used-0 = %{T4}%{T-}
+ramp-used-0 = %{T4}ﳔ%{T-}
 ramp-used-0-foreground = ${colors.success}
-ramp-used-1 = %{T4}%{T-}
+ramp-used-1 = %{T4}ﳔ%{T-}
 ramp-used-1-foreground = ${colors.success}
-ramp-used-2 = %{T4}%{T-}
+ramp-used-2 = %{T4}ﳔ%{T-}
 ramp-used-2-foreground = ${colors.success}
 
-ramp-used-3 = %{T4}%{T-}
+ramp-used-3 = %{T4}ﳔ%{T-}
 ramp-used-3-foreground = ${colors.notice}
-ramp-used-4 = %{T4}%{T-}
+ramp-used-4 = %{T4}ﳔ%{T-}
 ramp-used-4-foreground = ${colors.notice}
-ramp-used-5 = %{T4}%{T-}
+ramp-used-5 = %{T4}ﳔ%{T-}
 ramp-used-5-foreground = ${colors.notice}
-ramp-used-6 = %{T4}%{T-}
+ramp-used-6 = %{T4}ﳔ%{T-}
 
 ramp-used-6-foreground = ${colors.warning}
 ramp-used-7 = %{T4}%{T-}
@@ -398,7 +398,8 @@ interval = 1.0
 
 ;format-connected-underline = #55aa55
 ;format-connected-prefix = "🟢 "
-format-connected-prefix = %{T4}%{T-}
+; format-connected-prefix = %{T4}%{T-}
+format-connected-prefix = %{T4}%{T-}
 format-connected-prefix-foreground = ${colors.success}
 label-connected = "%local_ip:13% %linkspeed% 📥%downspeed:8% 📤%upspeed:8%"
 
@@ -510,19 +511,19 @@ ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-foreground = ${colors.foreground-alt}
 
-animation-charging-0 = %{T4}
-animation-charging-1 = %{T4}
-animation-charging-2 = %{T4}
-animation-charging-3 = %{T4}
-animation-charging-4 = %{T4}
+animation-charging-0 = %{T4}
+animation-charging-1 = %{T4}
+animation-charging-2 = %{T4}
+animation-charging-3 = %{T4}
+animation-charging-4 = %{T4}
 animation-charging-foreground = ${colors.yellow}
 animation-charging-framerate = 750
 
-animation-discharging-0 = %{T4}
-animation-discharging-1 = %{T4}
-animation-discharging-2 = %{T4}
-animation-discharging-3 = %{T4}
-animation-discharging-4 = %{T4}
+animation-discharging-0 = %{T4}
+animation-discharging-1 = %{T4}
+animation-discharging-2 = %{T4}
+animation-discharging-3 = %{T4}
+animation-discharging-4 = %{T4}
 animation-discharging-foreground = ${colors.red}
 animation-discharging-framerate = 750
 

@@ -1,3 +1,3 @@
 function less
-command less -N --use-color --incsearch $argv;
+command less -N --use-color --incsearch --redraw-on-quit $argv;
 end
